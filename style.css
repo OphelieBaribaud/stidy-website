@@ -87,3 +87,6 @@ footer.site a { margin-right: 16px; }
   .hero2 p { margin: 0 auto; }
   .phone { width: min(260px, 72vw); }
 }
+
+.faq h3 { font-size: 1.1rem; margin: 1.4em 0 .2em; }
+.faq p { margin: 0; color: var(--ink-soft); }
