@@ -12,28 +12,4 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://stidy.app/en/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://stidy.app/"/>
   </url>
-  <url>
-    <loc>https://stidy.app/privacy.html</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://stidy.app/privacy.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://stidy.app/en/privacy.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://stidy.app/privacy.html"/>
-  </url>
-  <url>
-    <loc>https://stidy.app/en/privacy.html</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://stidy.app/privacy.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://stidy.app/en/privacy.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://stidy.app/privacy.html"/>
-  </url>
-  <url>
-    <loc>https://stidy.app/terms.html</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://stidy.app/terms.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://stidy.app/en/terms.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://stidy.app/terms.html"/>
-  </url>
-  <url>
-    <loc>https://stidy.app/en/terms.html</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://stidy.app/terms.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://stidy.app/en/terms.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://stidy.app/terms.html"/>
-  </url>
 </urlset>
