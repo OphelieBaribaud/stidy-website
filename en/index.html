@@ -28,13 +28,15 @@
   <link rel="icon" href="../assets/icon.png">
   <link rel="stylesheet" href="../style.css">
   <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "MobileApplication", "name": "Stidy", "url": "https://stidy.app/en/", "description": "Stidy is a habit tracker and to-do list app: build streaks, log your mood, keep a private journal and stay motivated with friends. Free, in English and French.", "applicationCategory": "LifestyleApplication", "operatingSystem": "iOS, Android", "inLanguage": ["fr", "en"], "image": "https://stidy.app/assets/icon.png", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"}, "author": {"@type": "Person", "name": "Ophelie Baribaud"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is Stidy free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, Stidy has a free version to track your habits and tasks. An optional \"Plus\" subscription unlocks extra features, with a free trial."}}, {"@type": "Question", "name": "What is the difference between a habit and a task?", "acceptedAnswer": {"@type": "Answer", "text": "A habit repeats (daily, weekly or monthly) and builds a streak. A task is a one-off: you check it off once, like in a to-do list. Stidy brings both together in one place."}}, {"@type": "Question", "name": "Do I need an account to use Stidy?", "acceptedAnswer": {"@type": "Answer", "text": "No. You can start right away without an account, then link your account to Apple or Google to recover your data."}}, {"@type": "Question", "name": "Are my notes and habits private?", "acceptedAnswer": {"@type": "Answer", "text": "Your journal notes are encrypted and you choose what your friends see: you can hide a habit or a memory at any time."}}, {"@type": "Question", "name": "Which phones is Stidy available on?", "acceptedAnswer": {"@type": "Answer", "text": "Stidy is coming soon on iOS and Android, in French and English."}}]}]}</script>
+  <script>document.documentElement.classList.add("js")</script>
 </head>
 
 <body>
   <header class="site">
     <div class="wrap">
       <a class="brand" href="./"><img src="../assets/icon.png" alt="">Stidy</a>
-      <nav><a href="#features">Features</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a
+      <button class="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
+      <nav id="nav"><a href="#features">Features</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a
           href="../">Français</a></nav>
     </div>
   </header>
@@ -132,6 +134,34 @@
           href="mailto:ophelie@stidy.app">Contact</a></span>
     </div>
   </footer>
+  <script>
+    (function () {
+      var b = document.querySelector(".burger"), n = document.getElementById("nav");
+      if (!b || !n) return;
+      function set(open) { n.classList.toggle("open", open); b.setAttribute("aria-expanded", open); }
+      b.addEventListener("click", function () { set(!n.classList.contains("open")); });
+      n.addEventListener("click", function (e) { if (e.target.tagName === "A") set(false); });
+      document.addEventListener("keydown", function (e) { if (e.key === "Escape") set(false); });
+    })();
+  </script>
+  <script>
+    (function () {
+      var items = [];
+      function add(el, cls) { if (el) { el.classList.add(cls); items.push(el); } }
+      var hero = document.querySelector(".hero2");
+      if (hero) { add(hero.querySelector(".txt"), "reveal-l"); add(hero.querySelector(".phone"), "reveal-r"); }
+      document.querySelectorAll(".feature").forEach(function (f, i) {
+        var phoneLeft = i % 2 === 0;
+        add(f.querySelector(".phone"), phoneLeft ? "reveal-l" : "reveal-r");
+        add(f.querySelector(".txt"), phoneLeft ? "reveal-r" : "reveal-l");
+      });
+      if (!("IntersectionObserver" in window)) { items.forEach(function (el) { el.classList.add("in"); }); return; }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+      }, { threshold: 0.15 });
+      items.forEach(function (el) { io.observe(el); });
+    })();
+  </script>
 </body>
 
 </html>

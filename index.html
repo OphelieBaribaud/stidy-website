@@ -28,13 +28,15 @@
   <link rel="icon" href="assets/icon.png">
   <link rel="stylesheet" href="style.css">
   <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "MobileApplication", "name": "Stidy", "url": "https://stidy.app/", "description": "Stidy est l'appli de suivi d'habitudes et de gestion de tâches (to-do list) : séries, humeur, journal privé et amis pour rester motivé. Gratuit, en français et anglais.", "applicationCategory": "LifestyleApplication", "operatingSystem": "iOS, Android", "inLanguage": ["fr", "en"], "image": "https://stidy.app/assets/icon.png", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"}, "author": {"@type": "Person", "name": "Ophelie Baribaud"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Stidy est-il gratuit ?", "acceptedAnswer": {"@type": "Answer", "text": "Oui, Stidy propose une version gratuite pour suivre tes habitudes et tes tâches. Un abonnement optionnel « Plus » débloque des fonctionnalités supplémentaires, avec un essai gratuit."}}, {"@type": "Question", "name": "Quelle est la différence entre une habitude et une tâche ?", "acceptedAnswer": {"@type": "Answer", "text": "Une habitude se répète (chaque jour, chaque semaine ou chaque mois) et construit une série. Une tâche est ponctuelle : tu la coches une fois, comme dans une to-do list. Stidy réunit les deux au même endroit."}}, {"@type": "Question", "name": "Faut-il créer un compte pour utiliser Stidy ?", "acceptedAnswer": {"@type": "Answer", "text": "Non. Tu peux commencer tout de suite sans compte, puis relier ton compte à Apple ou Google pour retrouver tes données."}}, {"@type": "Question", "name": "Mes notes et mes habitudes sont-elles privées ?", "acceptedAnswer": {"@type": "Answer", "text": "Tes notes de journal sont chiffrées et tu choisis ce que tes amis voient : tu peux masquer une habitude ou un souvenir à tout moment."}}, {"@type": "Question", "name": "Sur quels téléphones est disponible Stidy ?", "acceptedAnswer": {"@type": "Answer", "text": "Stidy arrive bientôt sur iOS et Android, en français et en anglais."}}]}]}</script>
+  <script>document.documentElement.classList.add("js")</script>
 </head>
 
 <body>
   <header class="site">
     <div class="wrap">
       <a class="brand" href="./"><img src="assets/icon.png" alt="">Stidy</a>
-      <nav><a href="#features">Fonctionnalités</a><a href="privacy.html">Confidentialité</a><a
+      <button class="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
+      <nav id="nav"><a href="#features">Fonctionnalités</a><a href="privacy.html">Confidentialité</a><a
           href="terms.html">Conditions</a><a href="en/">English</a></nav>
     </div>
   </header>
@@ -132,6 +134,34 @@
           vente</a><a href="mailto:ophelie@stidy.app">Contact</a></span>
     </div>
   </footer>
+  <script>
+    (function () {
+      var b = document.querySelector(".burger"), n = document.getElementById("nav");
+      if (!b || !n) return;
+      function set(open) { n.classList.toggle("open", open); b.setAttribute("aria-expanded", open); }
+      b.addEventListener("click", function () { set(!n.classList.contains("open")); });
+      n.addEventListener("click", function (e) { if (e.target.tagName === "A") set(false); });
+      document.addEventListener("keydown", function (e) { if (e.key === "Escape") set(false); });
+    })();
+  </script>
+  <script>
+    (function () {
+      var items = [];
+      function add(el, cls) { if (el) { el.classList.add(cls); items.push(el); } }
+      var hero = document.querySelector(".hero2");
+      if (hero) { add(hero.querySelector(".txt"), "reveal-l"); add(hero.querySelector(".phone"), "reveal-r"); }
+      document.querySelectorAll(".feature").forEach(function (f, i) {
+        var phoneLeft = i % 2 === 0;
+        add(f.querySelector(".phone"), phoneLeft ? "reveal-l" : "reveal-r");
+        add(f.querySelector(".txt"), phoneLeft ? "reveal-r" : "reveal-l");
+      });
+      if (!("IntersectionObserver" in window)) { items.forEach(function (el) { el.classList.add("in"); }); return; }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+      }, { threshold: 0.15 });
+      items.forEach(function (el) { io.observe(el); });
+    })();
+  </script>
 </body>
 
 </html>

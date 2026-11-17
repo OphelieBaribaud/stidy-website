@@ -42,7 +42,8 @@ header.site { padding: 20px 0; border-bottom: 1px solid var(--border); }
 header.site .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
 .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.25rem; color: var(--ink); text-decoration: none; }
 .brand img { width: 36px; height: 36px; border-radius: 9px; }
-nav a { margin-left: 18px; text-decoration: none; color: var(--ink-soft); font-size: .95rem; }
+nav { display: flex; flex-wrap: wrap; gap: 4px 18px; }
+nav a { margin-left: 0; text-decoration: none; color: var(--ink-soft); font-size: .95rem; }
 nav a:hover { color: var(--ink-strong); }
 .hero { text-align: center; padding: 72px 0 56px; }
 .hero img { width: 112px; height: 112px; border-radius: 26px; box-shadow: 0 10px 30px rgba(172, 83, 70, .25); }
@@ -56,12 +57,12 @@ nav a:hover { color: var(--ink-strong); }
 .card .ico { font-size: 1.6rem; }
 section.block { padding-bottom: 56px; }
 section.block h2 { font-size: 1.6rem; margin-bottom: 8px; }
-.doc { padding: 40px 0 72px; }
+.doc { padding: 40px 20px 72px; }
 .doc h1 { font-size: 2.1rem; line-height: 1.2; margin-bottom: 4px; }
 .doc h2 { font-size: 1.3rem; margin-top: 2.2em; color: var(--ink-strong); }
 .doc .meta { color: var(--ink-soft); font-size: .95rem; margin-bottom: 2em; }
 .doc li { margin: .3em 0; }
-.doc table { border-collapse: collapse; width: 100%; font-size: .95rem; margin: 1em 0; }
+.doc table { display: block; overflow-x: auto; border-collapse: collapse; width: 100%; font-size: .95rem; margin: 1em 0; }
 .doc th, .doc td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; vertical-align: top; }
 .doc th { background: var(--accent-soft); }
 footer.site { border-top: 1px solid var(--border); padding: 28px 0 40px; color: var(--ink-soft); font-size: .92rem; }
@@ -69,12 +70,12 @@ footer.site .wrap { display: flex; justify-content: space-between; gap: 12px; fl
 footer.site a { margin-right: 16px; }
 
 /* Landing */
-.hero2 { display: flex; align-items: center; gap: 48px; padding: 64px 0 40px; }
+.hero2 { display: flex; align-items: center; gap: 48px; padding-top: 64px; padding-bottom: 40px; }
 .hero2 .txt { flex: 1; }
 .hero2 h1 { font-size: clamp(2.1rem, 5vw, 3.2rem); line-height: 1.12; margin: 0 0 16px; }
 .hero2 h1 em, .feature h2 em { font-style: normal; color: var(--ink-strong); }
 .hero2 p { font-size: 1.15rem; color: var(--ink-soft); margin: 0; max-width: 480px; }
-.feature { display: flex; align-items: center; gap: 56px; padding: 56px 0; }
+.feature { display: flex; align-items: center; gap: 56px; padding-top: 56px; padding-bottom: 56px; }
 .feature:nth-of-type(odd) { flex-direction: row-reverse; }
 .feature .txt { flex: 1; }
 .feature h2 { font-size: clamp(1.6rem, 3.5vw, 2.2rem); line-height: 1.15; margin: 0 0 8px; }
@@ -90,3 +91,35 @@ footer.site a { margin-right: 16px; }
 
 .faq h3 { font-size: 1.1rem; margin: 1.4em 0 .2em; }
 .faq p { margin: 0; color: var(--ink-soft); }
+
+/* Burger menu (mobile) */
+.burger { display: none; width: 44px; height: 44px; margin: -8px -10px -8px 0; padding: 0; border: 0; background: none; cursor: pointer; flex-direction: column; justify-content: center; align-items: center; gap: 5px; }
+.burger span { display: block; width: 22px; height: 2px; border-radius: 2px; background: var(--ink); transition: transform .2s, opacity .2s; }
+.burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+@media (max-width: 640px) {
+  header.site { padding: 12px 0; }
+  header.site .wrap { flex-wrap: wrap; }
+  .burger { display: flex; }
+  nav { width: 100%; flex-direction: column; gap: 0; padding-top: 8px; }
+  nav a { padding: 12px 0; font-size: 1rem; border-top: 1px solid var(--border); }
+  .js nav { display: none; }
+  .js nav.open { display: flex; }
+  .doc h1 { font-size: 1.7rem; }
+}
+
+/* Scroll reveal: elements slide in from the left or right */
+main { overflow-x: clip; }
+.js .reveal-l, .js .reveal-r { opacity: 0; transition: opacity .8s ease, transform .8s cubic-bezier(.2, .7, .2, 1); }
+.js .reveal-l { transform: translateX(-70px); }
+.js .reveal-r { transform: translateX(70px); }
+.js .reveal-l.in, .js .reveal-r.in { opacity: 1; transform: none; }
+.js .phone.reveal-l, .js .phone.reveal-r { transition-delay: .12s; }
+@media (max-width: 720px) {
+  .js .reveal-l { transform: translateX(-40px); }
+  .js .reveal-r { transform: translateX(40px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .js .reveal-l, .js .reveal-r { opacity: 1; transform: none; transition: none; }
+}
